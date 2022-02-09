@@ -1,5 +1,74 @@
 .container {
   height: 100vh;
-  width: 530px;
-  background-color: rgba(255, 255, 255, 0.85);
+}
+::-webkit-scrollbar {
+  width: 0px;
+}
+.iphone {
+  width: 355px;
+  height: 685px;
+  background-color: #222;
+  border-radius: 25px;
+  position: relative;
+  margin: auto;
+  box-shadow: 3px 0px 0px #444;
+}
+
+.frontcam {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: #444;
+  top: 18px;
+  left: 105px;
+}
+
+.speaker {
+  position: absolute;
+  width: 80px;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #222;
+  border: 1px solid #444;
+  top: 25px;
+  left: 135px;
+}
+.screen {
+  box-sizing: border-box;
+  width: 331px;
+  height: 570px;
+  position: relative;
+  left: 12.5px;
+  top: 58px;
+  background-color: white;
+}
+
+.screenContent {
+  position: absolute;
+  height: 583px;
+  top: 0;
+  left: 0;
+  width: 319px;
+  overflow: scroll;
+}
+
+iframe {
+  width: 100%;
+  height: 463px !important;
+  background-color: transparent;
+  border: 0px none transparent;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.homeBtn {
+  width: 40px;
+  height: 40px;
+  background-color: #222;
+  border: 2px solid #444;
+  position: absolute;
+  border-radius: 100%;
+  left: 158px;
+  bottom: 6px;
 }
