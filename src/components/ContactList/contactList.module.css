@@ -1,0 +1,40 @@
+.list {
+  margin: 0 0 20px 50px;
+  color: black;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.item {
+  width: 420px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 20px;
+}
+.name {
+  font-size: 20px;
+}
+.number {
+  font-size: 20px;
+  font-weight: 800;
+}
+.button {
+  width: 80px;
+  height: 30;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #ff6b08;
+  border: none;
+  border-radius: 7px;
+  text-transform: uppercase;
+  color: white;
+  outline: none;
+  transition: all 250ms ease-in-ou;
+}
+
+.button:hover {
+  background-color: rgb(170, 0, 0);
+}
