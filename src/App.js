@@ -3,7 +3,13 @@ import ContactForm from "./components/ContactForm";
 import Filter from "./components/Filter";
 import ContactList from "./components/ContactList";
 import Container from "./components/Container";
+import Modal from "./components/Modal";
+import Section from "./components/Section";
 import Notiflix from "notiflix";
+import IconButton from "./components/IconButton";
+
+import { ReactComponent as AddUserBtn } from "./icons/addUser.svg";
+import { ReactComponent as CloseBtn } from "./icons/close.svg";
 import { Component } from "react/cjs/react.production.min";
 
 export default class App extends Component {
@@ -15,6 +21,35 @@ export default class App extends Component {
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
     filter: "",
+    showModal: false,
+  };
+
+  componentDidMount() {
+    const contactsLS = JSON.parse(localStorage.getItem("contacts"));
+    if (contactsLS) {
+      this.setState({ contacts: contactsLS });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+
+    if (contacts !== prevState.contacts) {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+    }
+
+    if (
+      contacts.length > prevState.contacts.length &&
+      prevState.contacts.length !== 0
+    ) {
+      this.toggleModal();
+    }
+  }
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
   };
 
   addContact = ({ name, number }) => {
@@ -62,33 +97,44 @@ export default class App extends Component {
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
-
   render() {
-    const { filter, contacts } = this.state;
-    console.log(this.getVisibleContacts());
+    const { filter, contacts, showModal } = this.state;
 
     return (
       <Container>
-        <h1 className="title">Phonebook 📲</h1>
-        <ContactForm onSubmit={this.addContact} />
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <ContactForm onSubmit={this.addContact} />
+            <IconButton onClick={this.toggleModal}>
+              <CloseBtn className="closeModal" />
+            </IconButton>
+          </Modal>
+        )}
 
-        <h2 className="title">Contacts 📞</h2>
-        {contacts.length > 0 && (
-          <Filter value={filter} onChange={this.changeFilter} />
-        )}
-        {contacts.length > 0 ? (
-          <ContactList
-            contacts={this.getVisibleContacts()}
-            onDeleteContact={this.deleteContact}
-          />
-        ) : (
-          <p className="notification">
-            Your phonebook is empty. Please add contact.
-          </p>
-        )}
-        {filter.length >= this.getVisibleContacts() && (
-          <p className="notification">No matches found.</p>
-        )}
+        <Section title="Phonebook">
+          <IconButton onClick={this.toggleModal}>
+            <AddUserBtn className="openModal" />
+          </IconButton>
+        </Section>
+
+        <Section title="Contacts">
+          {contacts.length > 0 && (
+            <Filter value={filter} onChange={this.changeFilter} />
+          )}
+          {contacts.length > 0 ? (
+            <ContactList
+              contacts={this.getVisibleContacts()}
+              onDeleteContact={this.deleteContact}
+            />
+          ) : (
+            <p className="notification">
+              Your phonebook is empty. Please add contact.
+            </p>
+          )}
+          {filter.length >= this.getVisibleContacts() && (
+            <p className="notification">No matches found.</p>
+          )}
+        </Section>
       </Container>
     );
   }

@@ -1,5 +1,7 @@
 .container {
+  position: relative;
   height: 100vh;
+  display: flex;
 }
 ::-webkit-scrollbar {
   width: 0px;

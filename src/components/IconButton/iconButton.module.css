@@ -1,0 +1,15 @@
+.iconButton {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: black;
+  font: inherit;
+  cursor: pointer;
+  transition: all 250ms ease-in-ou;
+}
+.iconButton:hover {
+  color: #ff6b08;
+}

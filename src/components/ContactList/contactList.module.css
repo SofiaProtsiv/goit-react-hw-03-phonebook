@@ -8,11 +8,13 @@
 .item {
   width: 290px;
   display: flex;
+  padding-bottom: 10px;
   justify-content: space-between;
 }
 
 .item:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.5);
 }
 .name {
   font-size: 14px;
